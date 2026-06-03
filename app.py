@@ -14,8 +14,8 @@ st.set_page_config(
 # ==========================
 # LOAD MODEL
 # ==========================
-model = joblib.load("model.joblib")
-scaler = joblib.load("scaler.joblib")
+model = joblib.load("model.pkl")
+scaler = joblib.load("scaler.pkl")
 
 # ==========================
 # CUSTOM CSS
