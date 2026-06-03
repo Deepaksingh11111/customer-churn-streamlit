@@ -6,7 +6,7 @@ import numpy as np
 # PAGE CONFIG
 # ==========================
 st.set_page_config(
-    page_title="Customer Churn Prediction",
+    page_title="Customer Churn Predictor",
     page_icon="📊",
     layout="wide"
 )
@@ -14,61 +14,102 @@ st.set_page_config(
 # ==========================
 # LOAD MODEL
 # ==========================
-model = joblib.load("model.pkl")
-scaler = joblib.load("scaler.pkl")
+model = joblib.load("model.joblib")
+scaler = joblib.load("scaler.joblib")
 
 # ==========================
 # CUSTOM CSS
 # ==========================
 st.markdown("""
 <style>
-.main {
-    background-color: #0E1117;
+
+/* Main Background */
+.stApp {
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #111827
+    );
+    color: white;
 }
 
-.title {
+/* Title */
+.main-title {
     text-align: center;
-    color: #00D4FF;
-    font-size: 42px;
+    font-size: 55px;
     font-weight: bold;
+    background: linear-gradient(
+        90deg,
+        #38bdf8,
+        #818cf8,
+        #ec4899
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 5px;
 }
 
+/* Subtitle */
 .subtitle {
     text-align: center;
-    color: gray;
-    font-size: 18px;
+    color: #d1d5db;
+    font-size: 20px;
+    margin-bottom: 25px;
 }
 
-.stButton > button {
+/* Glass Card */
+.card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Button */
+.stButton>button {
     width: 100%;
-    height: 50px;
-    border-radius: 12px;
-    font-size: 18px;
+    height: 60px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(
+        90deg,
+        #3b82f6,
+        #9333ea
+    );
+    color: white;
+    font-size: 22px;
     font-weight: bold;
+    transition: 0.3s;
 }
 
+.stButton>button:hover {
+    transform: scale(1.03);
+}
+
+/* Footer */
 .footer {
     text-align: center;
-    color: gray;
     margin-top: 30px;
+    color: #9ca3af;
+    font-size: 14px;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # ==========================
-# TITLE
+# HEADER
 # ==========================
 st.markdown(
-    '<div class="title">📊 Customer Churn Prediction</div>',
+    '<div class="main-title">📊 Customer Churn Predictor</div>',
     unsafe_allow_html=True
 )
 
 st.markdown(
-    '<div class="subtitle">Predict whether customer will churn or stay</div>',
+    '<div class="subtitle">AI-powered prediction to check if a customer will stay or churn</div>',
     unsafe_allow_html=True
 )
-
-st.divider()
 
 # ==========================
 # INPUT SECTION
@@ -76,7 +117,9 @@ st.divider()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("Customer Details")
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+
+    st.subheader("👤 Customer Details")
 
     senior_citizen = st.selectbox(
         "Senior Citizen",
@@ -87,25 +130,28 @@ with col1:
         "Tenure (Months)",
         0,
         72,
-        12
+        24
     )
 
-    monthly_charges = st.number_input(
+    monthly_charges = st.slider(
         "Monthly Charges",
-        min_value=0.0,
-        max_value=200.0,
-        value=70.0
+        0.0,
+        200.0,
+        70.0
     )
 
     total_charges = st.number_input(
         "Total Charges",
         min_value=0.0,
-        max_value=10000.0,
-        value=1500.0
+        value=2000.0
     )
 
+    st.markdown('</div>', unsafe_allow_html=True)
+
 with col2:
-    st.subheader("Service Details")
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+
+    st.subheader("📞 Service Details")
 
     partner = st.selectbox(
         "Partner",
@@ -127,15 +173,18 @@ with col2:
         [0, 1]
     )
 
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.write("")
+
 # ==========================
 # PREDICT BUTTON
 # ==========================
-if st.button("Predict Churn 🚀"):
+if st.button("🚀 Predict Customer Churn"):
 
     # Model expects 30 features
     input_data = np.zeros((1, 30))
 
-    # Fill known values
     input_data[0, 0] = senior_citizen
     input_data[0, 1] = tenure
     input_data[0, 2] = monthly_charges
@@ -145,31 +194,45 @@ if st.button("Predict Churn 🚀"):
     input_data[0, 6] = phone_service
     input_data[0, 7] = paperless_billing
 
-    # Scale input
-    scaled_features = scaler.transform(
-        input_data
-    )
+    scaled_data = scaler.transform(input_data)
 
-    # Prediction
     prediction = model.predict(
-        scaled_features
+        scaled_data
     )[0]
+
+    try:
+        probability = (
+            model.predict_proba(
+                scaled_data
+            )[0][1] * 100
+        )
+    except:
+        probability = 50
 
     st.divider()
 
     if prediction == 1:
         st.error(
-            "⚠ Customer Will Churn"
+            f"⚠ Customer Will Churn\n\nRisk Probability: {probability:.2f}%"
         )
+
+        st.progress(
+            int(probability)
+        )
+
     else:
         st.success(
-            "✅ Customer Will Stay"
+            f"✅ Customer Will Stay\n\nConfidence Score: {100-probability:.2f}%"
+        )
+
+        st.progress(
+            int(100-probability)
         )
 
 # ==========================
 # FOOTER
 # ==========================
 st.markdown(
-    '<div class="footer">Built with Streamlit | Customer Churn Prediction</div>',
+    '<div class="footer">Built with ❤️ using Streamlit | Customer Churn Prediction</div>',
     unsafe_allow_html=True
 )
