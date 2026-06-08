@@ -79,7 +79,7 @@ div[data-testid="column"] {
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 24px !important;
     padding: 35px !important;
-    backdrop-filter: blur(25px) ipsl-effect !important;
+    backdrop-filter: blur(25px) !important;
     -webkit-backdrop-filter: blur(25px) !important;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
                 inset 0 1px 2px rgba(255, 255, 255, 0.1) !important;
@@ -174,7 +174,7 @@ div[data-testid="stNotification"] {
 # ==========================
 st.markdown("""
 <div class="header-container">
-    <div class="main-title">Futuristic Glass UI Churn Predictor</div>
+    <div class="main-title"> Customer Churn Predictor </div>
     <div class="subtitle">Next-gen analytical engine predicting real-time user retention</div>
 </div>
 """, unsafe_allow_html=True)
@@ -185,22 +185,46 @@ if model is None or scaler is None:
     st.stop()
 
 # ==========================
-# 5. INPUT FIELDS SECTION
+# 5. INPUT FIELDS SECTION WITH FEATURE EXPLANATIONS
 # ==========================
 col1, col2 = st.columns(2)
 
 with col1:
     st.markdown('<div class="section-heading-1">👤 Customer Profile</div>', unsafe_allow_html=True)
+    
+    # FEATURE: Senior Citizen Status
+    # Tells if the user is an older adult. Senior citizens usually seek stability and don't change networks often.
     senior_citizen = st.selectbox("Senior Citizen Status", [0, 1], help="0 = No, 1 = Yes")
+    
+    # FEATURE: Account Tenure
+    # Tracks relationship length. Long-term customers are loyal; users in their first 1-3 months are the highest risk.
     tenure = st.slider("Account Tenure (Months)", 0, 72, 24)
+    
+    # FEATURE: Monthly Charges 
+    # Measures immediate financial load. Higher bills create an immediate motivation to switch to a cheaper competitor.
     monthly_charges = st.slider("Monthly Charges Billing ($)", 0.0, 200.0, 70.0)
+    
+    # FEATURE: Total Charges
+    # Tracks cumulative lifetime financial investment. Acts as an indicator of past customer commitment.
     total_charges = st.number_input("Total Lifetime Accumulation ($)", min_value=0.0, value=2000.0)
 
 with col2:
     st.markdown('<div class="section-heading-2">📊 Analytics & Network</div>', unsafe_allow_html=True)
+    
+    # FEATURE: Partner Status
+    # Indicates family ties. Married/cohabiting individuals show stable behavior profiles and drop services less frequently.
     partner = st.selectbox("Has Registered Partner", [0, 1], help="0 = No, 1 = Yes")
+    
+    # FEATURE: Dependents Status
+    # Highlights household reliance. Multi-user homes find it operationally disruptive to switch telecom networks.
     dependents = st.selectbox("Has Dependents", [0, 1], help="0 = No, 1 = Yes")
+    
+    # FEATURE: Activated Phone Line Service
+    # Checks service adoption footprint. Multi-service bundles (Internet + Voice) heavily reduce chances of cancellation.
     phone_service = st.selectbox("Activated Phone Line Service", [0, 1], help="0 = No, 1 = Yes")
+    
+    # FEATURE: Digital Paperless Billing
+    # Identifies digital engagement level. Tech-savvy users respond quickly to competitors' digital advertisements.
     paperless_billing = st.selectbox("Digital Paperless Billing", [0, 1], help="0 = No, 1 = Yes")
 
 st.write("")
