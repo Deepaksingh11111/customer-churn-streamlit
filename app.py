@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # ==========================
-# 2. LOAD MODEL & SCALER (Safe Loading)
+# 2. LOAD MODEL & SCALER
 # ==========================
 @st.cache_resource
 def load_assets():
@@ -26,127 +26,145 @@ def load_assets():
 model, scaler = load_assets()
 
 # ==========================
-# 3. UNIVERSAL STABLE CSS (Har System Ke Liye Fixed)
+# 3. FUTURISTIC GLASSMISM CSS
 # ==========================
 st.markdown("""
 <style>
-/* Global Font Integration - Direct from Google Server */
+/* Global Font Integration */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 html, body, [class*="css"], .stApp {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-/* Premium Dark Background */
+/* Deep Space Nebula Background mimicking the image */
 .stApp {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #111827 100%) !important;
-    color: #f3f4f6 !important;
+    background: radial-gradient(circle at 20% 30%, #2e1065 0%, #0f172a 50%, #020617 100%) !important;
+    background-attachment: fixed !important;
+    color: #f8fafc !important;
 }
 
-/* ---- HEADER FIXED SECTION (No Blue Box, No Text Cut) ---- */
+/* ---- HEADER SECTION ---- */
 .header-container {
     text-align: center;
-    padding: 25px 10px;
-    margin-bottom: 30px;
+    padding: 30px 10px;
+    margin-bottom: 20px;
     width: 100%;
-    display: block;
-    clear: both;
-    background: transparent !important;
 }
 
 .main-title {
-    font-size: clamp(28px, 4.5vw, 48px) !important;
+    font-size: clamp(30px, 5vw, 52px) !important;
     font-weight: 800 !important;
-    line-height: 1.2 !important;
-    margin: 0px auto 12px auto !important;
-    padding: 0 !important;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px !important;
     
-    /* Cross-browser Gradient Text Fix */
-    background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #ec4899 100%) !important;
+    /* Neon Pink & Cyan Gradient Text */
+    background: linear-gradient(90deg, #38bdf8 0%, #c084fc 50%, #f472b6 100%) !important;
     background-clip: text !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     color: transparent !important;
-    
     display: inline-block !important;
 }
 
 .subtitle {
-    color: #9ca3af !important;
-    font-size: clamp(14px, 2vw, 17px) !important;
-    font-weight: 400 !important;
-    margin-top: 5px !important;
-    margin-bottom: 0px !important;
-    line-height: 1.5 !important;
-    background: transparent !important;
+    color: #94a3b8 !important;
+    font-size: clamp(14px, 2vw, 18px) !important;
+    font-weight: 400;
 }
-/* -------------------------------------------------------- */
 
-/* Streamlit Native Columns Hijack (Symmetrical Glassmorphism Cards) */
+/* ---- FUTURISTIC GLASS UI CONTAINER HACK ---- */
 div[data-testid="column"] {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 16px !important;
-    padding: 28px !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
-    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 24px !important;
+    padding: 35px !important;
+    backdrop-filter: blur(25px) ipsl-effect !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.1) !important;
+    margin-bottom: 25px;
 }
 
-/* High Contrast Input Labels */
+/* Form Headings */
+.section-heading-1 {
+    color: #38bdf8 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    margin-bottom: 25px !important;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.section-heading-2 {
+    color: #c084fc !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    margin-bottom: 25px !important;
+    text-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+}
+
+/* High Contrast Readable Input Labels */
 div[data-testid="stWidgetFormLabel"] p, label p, .stSlider p {
-    color: #e5e7eb !important;
-    font-weight: 500 !important;
+    color: #f1f5f9 !important;
+    font-weight: 600 !important;
     font-size: 15px !important;
+    letter-spacing: 0.3px;
 }
 
-/* Custom Dropdown/Selectbox Wrapper for Dark Theme */
-.stSelectbox div[data-baseweb="select"] {
-    background-color: rgba(15, 23, 42, 0.7) !important;
+/* Glass Inputs (Selectbox & Number inputs) */
+.stSelectbox div[data-baseweb="select"], .stNumberInput input {
+    background-color: rgba(15, 23, 42, 0.6) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(10px) !important;
 }
 
-/* Number Input Box Fix */
-.stNumberInput input {
-    background-color: rgba(15, 23, 42, 0.7) !important;
-    color: white !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
+.stSelectbox div[data-baseweb="select"]:hover, .stNumberInput input:focus {
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2) !important;
 }
 
-/* Centered Glowing Predict Button */
+/* Neon Glowing Active Blue Button mimicking 'Upgrade Pro' */
 .stButton > button {
     width: 100% !important;
-    height: 55px !important;
-    background: linear-gradient(90deg, #2563eb, #7c3aed) !important;
+    height: 58px !important;
+    background: linear-gradient(90deg, #1d4ed8 0%, #7c3aed 100%) !important;
     color: #ffffff !important;
-    border: none !important;
-    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 16px !important;
     font-size: 18px !important;
-    font-weight: 600 !important;
-    transition: all 0.25s ease-in-out !important;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3) !important;
-    margin-top: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    margin-top: 20px !important;
 }
 
 .stButton > button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5) !important;
-    border: none !important;
+    transform: translateY(-3px) !important;
+    background: linear-gradient(90deg, #2563eb 0%, #8b5cf6 100%) !important;
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.6),
+                0 0 15px rgba(56, 189, 248, 0.4) !important;
     color: #ffffff !important;
+}
+
+/* Alerts Overwrite for Futuristic Feel */
+div[data-testid="stNotification"] {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border-radius: 16px !important;
+    backdrop-filter: blur(15px) !important;
 }
 
 /* Footer Styling */
 .footer {
     text-align: center;
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: #6b7280;
+    margin-top: 80px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #64748b;
     font-size: 13px;
-    font-weight: 400;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -156,14 +174,14 @@ div[data-testid="stWidgetFormLabel"] p, label p, .stSlider p {
 # ==========================
 st.markdown("""
 <div class="header-container">
-    <div class="main-title">📊 Customer Churn Predictor</div>
-    <div class="subtitle">AI-powered prediction to check if a customer will stay or churn</div>
+    <div class="main-title">Futuristic Glass UI Churn Predictor</div>
+    <div class="subtitle">Next-gen analytical engine predicting real-time user retention</div>
 </div>
 """, unsafe_allow_html=True)
 
 # File Validation Check
 if model is None or scaler is None:
-    st.error("❌ **'model.pkl'** ya **'scaler.pkl'** aapke current folder mein nahi mili! Pehle files upload karein.")
+    st.error("❌ **'model.pkl'** or **'scaler.pkl'** missing in root folder! Please add your assets.")
     st.stop()
 
 # ==========================
@@ -172,30 +190,28 @@ if model is None or scaler is None:
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("<h3 style='color:#38bdf8; font-size:22px; margin-top:0; font-weight:700; margin-bottom:20px;'>👤 Customer Details</h3>", unsafe_allow_html=True)
-    senior_citizen = st.selectbox("Senior Citizen", [0, 1], help="0 = No, 1 = Yes")
-    tenure = st.slider("Tenure (Months)", 0, 72, 24)
-    monthly_charges = st.slider("Monthly Charges ($)", 0.0, 200.0, 70.0)
-    total_charges = st.number_input("Total Charges ($)", min_value=0.0, value=2000.0)
+    st.markdown('<div class="section-heading-1">👤 Customer Profile</div>', unsafe_allow_html=True)
+    senior_citizen = st.selectbox("Senior Citizen Status", [0, 1], help="0 = No, 1 = Yes")
+    tenure = st.slider("Account Tenure (Months)", 0, 72, 24)
+    monthly_charges = st.slider("Monthly Charges Billing ($)", 0.0, 200.0, 70.0)
+    total_charges = st.number_input("Total Lifetime Accumulation ($)", min_value=0.0, value=2000.0)
 
 with col2:
-    st.markdown("<h3 style='color:#818cf8; font-size:22px; margin-top:0; font-weight:700; margin-bottom:20px;'>📞 Service Details</h3>", unsafe_allow_html=True)
-    partner = st.selectbox("Partner", [0, 1], help="0 = No, 1 = Yes")
-    dependents = st.selectbox("Dependents", [0, 1], help="0 = No, 1 = Yes")
-    phone_service = st.selectbox("Phone Service", [0, 1], help="0 = No, 1 = Yes")
-    paperless_billing = st.selectbox("Paperless Billing", [0, 1], help="0 = No, 1 = Yes")
+    st.markdown('<div class="section-heading-2">📊 Analytics & Network</div>', unsafe_allow_html=True)
+    partner = st.selectbox("Has Registered Partner", [0, 1], help="0 = No, 1 = Yes")
+    dependents = st.selectbox("Has Dependents", [0, 1], help="0 = No, 1 = Yes")
+    phone_service = st.selectbox("Activated Phone Line Service", [0, 1], help="0 = No, 1 = Yes")
+    paperless_billing = st.selectbox("Digital Paperless Billing", [0, 1], help="0 = No, 1 = Yes")
 
 st.write("")
 
 # ==========================
 # 6. ML PREDICTION ENGINE
 # ==========================
-if st.button("🚀 Predict Customer Churn"):
+if st.button("⚡ Execute Prediction Metrics"):
     
-    # Base array for 30 features expected by your model
     input_data = np.zeros((1, 30))
     
-    # Mapping inputs to correct index
     input_data[0, 0] = senior_citizen
     input_data[0, 1] = tenure
     input_data[0, 2] = monthly_charges
@@ -205,7 +221,6 @@ if st.button("🚀 Predict Customer Churn"):
     input_data[0, 6] = phone_service
     input_data[0, 7] = paperless_billing
 
-    # Scaling and Prediction
     scaled_data = scaler.transform(input_data)
     prediction = model.predict(scaled_data)[0]
 
@@ -216,18 +231,18 @@ if st.button("🚀 Predict Customer Churn"):
 
     st.divider()
 
-    # Dynamic Alert boxes with high visibility text
+    # Highly-styled glass alerts matching UI
     if prediction == 1:
-        st.error(f"### ⚠ Customer Will Churn\n\n**Risk Probability:** {probability:.2f}%")
+        st.error(f"### ⚠ Alert: High Risk Churn Trend Identified\n\n**Risk Probability Index:** {probability:.2f}%")
         st.progress(int(probability))
     else:
-        st.success(f"### ✅ Customer Will Stay\n\n**Confidence Score:** {100-probability:.2f}%")
+        st.success(f"### ✅ Positive Stability: Account Will Stay Active\n\n**Confidence Index Score:** {100-probability:.2f}%")
         st.progress(int(100-probability))
 
 # ==========================
 # 7. FOOTER SECTION
 # ==========================
 st.markdown(
-    '<div class="footer">Built with ❤️ using Streamlit | Customer Churn Prediction</div>',
+    '<div class="footer">Engineered with Streamlit UI Engine | Core Analytics Matrix</div>',
     unsafe_allow_html=True
 )
