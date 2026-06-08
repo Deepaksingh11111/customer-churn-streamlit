@@ -26,7 +26,7 @@ def load_assets():
 model, scaler = load_assets()
 
 # ==========================
-# 3. FUTURISTIC GLASSMISM CSS
+# 3. LUXURY OBSIDIAN & GOLD MATTE CSS (FULLY ANIMATED)
 # ==========================
 st.markdown("""
 <style>
@@ -37,29 +37,43 @@ html, body, [class*="css"], .stApp {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-/* Deep Space Nebula Background mimicking the image */
+/* Premium Matte Dark Charcoal/Obsidian Canvas */
 .stApp {
-    background: radial-gradient(circle at 20% 30%, #2e1065 0%, #0f172a 50%, #020617 100%) !important;
+    background: #1e1e1e !important;
+    background-image: radial-gradient(circle at 10% 20%, rgba(38, 33, 30, 0.7) 0%, rgba(22, 22, 22, 1) 90%) !important;
     background-attachment: fixed !important;
-    color: #f8fafc !important;
+    color: #ffffff !important;
+}
+
+/* ---- KEYFRAMES FOR SMOOTH ANIMATIONS ---- */
+@keyframes goldGlow {
+    0% { border-color: rgba(212, 163, 115, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    50% { border-color: rgba(212, 163, 115, 0.4); box-shadow: 0 10px 35px rgba(212, 163, 115, 0.1); }
+    100% { border-color: rgba(212, 163, 115, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+}
+
+@keyframes pulseButton {
+    0% { box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(212, 163, 115, 0.6); }
+    100% { box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3); }
 }
 
 /* ---- HEADER SECTION ---- */
 .header-container {
     text-align: center;
-    padding: 30px 10px;
-    margin-bottom: 20px;
+    padding: 35px 10px;
+    margin-bottom: 25px;
     width: 100%;
 }
 
 .main-title {
-    font-size: clamp(30px, 5vw, 52px) !important;
+    font-size: clamp(32px, 5vw, 54px) !important;
     font-weight: 800 !important;
     letter-spacing: -0.5px;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     
-    /* Neon Pink & Cyan Gradient Text */
-    background: linear-gradient(90deg, #38bdf8 0%, #c084fc 50%, #f472b6 100%) !important;
+    /* Luxury Burnished Gold Gradient Text */
+    background: linear-gradient(135deg, #f5e3c3 0%, #d4a373 50%, #aa7c4c 100%) !important;
     background-clip: text !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
@@ -68,103 +82,119 @@ html, body, [class*="css"], .stApp {
 }
 
 .subtitle {
-    color: #94a3b8 !important;
+    color: #a3a3a3 !important;
     font-size: clamp(14px, 2vw, 18px) !important;
     font-weight: 400;
+    letter-spacing: 0.2px;
 }
 
-/* ---- FUTURISTIC GLASS UI CONTAINER HACK ---- */
+/* ---- MATTE OBSIDIAN CONTAINERS (AMPLIFIED VISIBILITY) ---- */
 div[data-testid="column"] {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 24px !important;
+    background: rgba(30, 30, 30, 0.75) !important;
+    border: 1px solid rgba(212, 163, 115, 0.2) !important;
+    border-radius: 20px !important;
     padding: 35px !important;
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
-                inset 0 1px 2px rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     margin-bottom: 25px;
+    
+    /* Smooth Continuous Glow Animation */
+    animation: goldGlow 6s infinite ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Form Headings */
-.section-heading-1 {
-    color: #38bdf8 !important;
+div[data-testid="column"]:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 163, 115, 0.5) !important;
+}
+
+/* Typography Headings */
+.section-heading-1, .section-heading-2 {
+    color: #e5c39e !important;
     font-size: 24px !important;
     font-weight: 700 !important;
     margin-bottom: 25px !important;
-    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(212, 163, 115, 0.15);
+    padding-bottom: 8px;
 }
 
-.section-heading-2 {
-    color: #c084fc !important;
-    font-size: 24px !important;
-    font-weight: 700 !important;
-    margin-bottom: 25px !important;
-    text-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
-}
-
-/* High Contrast Readable Input Labels */
+/* Universally Clear Form Field Labels */
 div[data-testid="stWidgetFormLabel"] p, label p, .stSlider p {
-    color: #f1f5f9 !important;
+    color: #ffffff !important;
     font-weight: 600 !important;
     font-size: 15px !important;
-    letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Glass Inputs (Selectbox & Number inputs) */
+/* Ultra-Visible Text Helper Descriptions under inputs */
+div[data-testid="stMarkdownContainer"] p {
+    color: #d1d5db !important;
+}
+
+/* Custom Styled Input Fields (Selectbox, Sliders, Number Inputs) */
 .stSelectbox div[data-baseweb="select"], .stNumberInput input {
-    background-color: rgba(15, 23, 42, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 12px !important;
+    background-color: #121212 !important;
+    border: 1px solid rgba(212, 163, 115, 0.3) !important;
+    border-radius: 10px !important;
     color: #ffffff !important;
-    backdrop-filter: blur(10px) !important;
+    height: 48px !important;
 }
 
 .stSelectbox div[data-baseweb="select"]:hover, .stNumberInput input:focus {
-    border-color: #38bdf8 !important;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2) !important;
+    border-color: #f5e3c3 !important;
 }
 
-/* Neon Glowing Active Blue Button mimicking 'Upgrade Pro' */
+/* Custom Accent Sync for Sliders */
+div[data-testid="stSlider"] [data-disabled="false"] {
+    background-color: #d4a373 !important;
+}
+
+/* ---- PREMIUM BURNISHED GOLD EXECUTE BUTTON ---- */
 .stButton > button {
     width: 100% !important;
-    height: 58px !important;
-    background: linear-gradient(90deg, #1d4ed8 0%, #7c3aed 100%) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 16px !important;
-    font-size: 18px !important;
-    font-weight: 700 !important;
+    height: 60px !important;
+    background: linear-gradient(90deg, #b58957 0%, #d4a373 50%, #b58957 100%) !important;
+    color: #121212 !important; /* High contrast black font color on gold surface */
+    border: none !important;
+    border-radius: 14px !important;
+    font-size: 19px !important;
+    font-weight: 800 !important;
     letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-    margin-top: 20px !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    animation: pulseButton 3s infinite ease-in-out;
+    margin-top: 25px !important;
+    cursor: pointer;
 }
 
 .stButton > button:hover {
-    transform: translateY(-3px) !important;
-    background: linear-gradient(90deg, #2563eb 0%, #8b5cf6 100%) !important;
-    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.6),
-                0 0 15px rgba(56, 189, 248, 0.4) !important;
-    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    background: linear-gradient(90deg, #d4a373 0%, #f5e3c3 100%) !important;
+    color: #000000 !important;
+    box-shadow: 0 15px 35px rgba(212, 163, 115, 0.6) !important;
 }
 
-/* Alerts Overwrite for Futuristic Feel */
+/* Styled Alert Modules for Output Display */
 div[data-testid="stNotification"] {
-    background: rgba(15, 23, 42, 0.6) !important;
-    border-radius: 16px !important;
-    backdrop-filter: blur(15px) !important;
+    background: rgba(22, 22, 22, 0.9) !important;
+    border: 1px solid rgba(212, 163, 115, 0.3) !important;
+    border-radius: 14px !important;
 }
 
-/* Footer Styling */
+/* Universal Progress Bar Color Overrides */
+div[data-testid="stProgress"] div[role="progressbar"] > div {
+    background-color: #d4a373 !important;
+}
+
+/* Footer Section styling */
 .footer {
     text-align: center;
-    margin-top: 80px;
+    margin-top: 90px;
     padding-top: 25px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    color: #64748b;
+    border-top: 1px solid rgba(212, 163, 115, 0.1);
+    color: #8c8c8c;
     font-size: 13px;
+    letter-spacing: 0.5px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -193,39 +223,39 @@ with col1:
     st.markdown('<div class="section-heading-1">👤 Customer Profile</div>', unsafe_allow_html=True)
     
     # FEATURE: Senior Citizen Status
-    # Tells if the user is an older adult. Senior citizens usually seek stability and don't change networks often.
     senior_citizen = st.selectbox("Senior Citizen Status", [0, 1], help="0 = No, 1 = Yes")
+    st.caption("Tells if the user is an older adult. Senior citizens usually seek stability and don't change networks often.")
     
     # FEATURE: Account Tenure
-    # Tracks relationship length. Long-term customers are loyal; users in their first 1-3 months are the highest risk.
     tenure = st.slider("Account Tenure (Months)", 0, 72, 24)
+    st.caption("Tracks relationship length. Long-term customers are loyal; users in their first 1-3 months are the highest risk.")
     
     # FEATURE: Monthly Charges 
-    # Measures immediate financial load. Higher bills create an immediate motivation to switch to a cheaper competitor.
     monthly_charges = st.slider("Monthly Charges Billing ($)", 0.0, 200.0, 70.0)
+    st.caption("Measures immediate financial load. Higher bills create an immediate motivation to switch to a cheaper competitor.")
     
     # FEATURE: Total Charges
-    # Tracks cumulative lifetime financial investment. Acts as an indicator of past customer commitment.
     total_charges = st.number_input("Total Lifetime Accumulation ($)", min_value=0.0, value=2000.0)
+    st.caption("Tracks cumulative lifetime financial investment. Acts as an indicator of past customer commitment.")
 
 with col2:
     st.markdown('<div class="section-heading-2">📊 Analytics & Network</div>', unsafe_allow_html=True)
     
     # FEATURE: Partner Status
-    # Indicates family ties. Married/cohabiting individuals show stable behavior profiles and drop services less frequently.
     partner = st.selectbox("Has Registered Partner", [0, 1], help="0 = No, 1 = Yes")
+    st.caption("Indicates family ties. Married/cohabiting individuals show stable behavior profiles and drop services less frequently.")
     
     # FEATURE: Dependents Status
-    # Highlights household reliance. Multi-user homes find it operationally disruptive to switch telecom networks.
     dependents = st.selectbox("Has Dependents", [0, 1], help="0 = No, 1 = Yes")
+    st.caption("Highlights household reliance. Multi-user homes find it operationally disruptive to switch telecom networks.")
     
     # FEATURE: Activated Phone Line Service
-    # Checks service adoption footprint. Multi-service bundles (Internet + Voice) heavily reduce chances of cancellation.
     phone_service = st.selectbox("Activated Phone Line Service", [0, 1], help="0 = No, 1 = Yes")
+    st.caption("Checks service adoption footprint. Multi-service bundles (Internet + Voice) heavily reduce chances of cancellation.")
     
     # FEATURE: Digital Paperless Billing
-    # Identifies digital engagement level. Tech-savvy users respond quickly to competitors' digital advertisements.
     paperless_billing = st.selectbox("Digital Paperless Billing", [0, 1], help="0 = No, 1 = Yes")
+    st.caption("Identifies digital engagement level. Tech-savvy users respond quickly to competitors' digital advertisements.")
 
 st.write("")
 
